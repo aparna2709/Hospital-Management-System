@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+       "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+       "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+   <class name="hms.entity.Doctor" table="Doctor">
+  
+       <id name="Did" type="string" >
+           <column name="D_id" />      
+       </id>
+      
+       <property name="Dfirstname" type="string" not-null="true">
+           <column name="D_firstname" />
+       </property>
+      
+       <property name="Dlastname" type="string" not-null = "true">
+           <column name="D_lastname" />
+       </property>
+      
+      <property name="Dgender" type="string" not-null = "true">
+           <column name="D_gender" />
+       </property>
+       
+       <property name="specialization" type="string" not-null = "true">
+           <column name="Specializaton" />
+       </property>
+          
+       <property name="email" type="string">
+           <column name="Email" />
+       </property>    
+       
+       <!-- Define the one-to-many association with Patient -->
+       
+        <set name="patients" table="patient" cascade="all">
+            <key> <column name="D_id"/></key>
+            <one-to-many class="hms.entity.Patient"/>
+            
+        </set>
+      
+       <!-- Define the one-to-many association with Appointment -->
+        <set name="appointments" table="appointment" cascade="all">
+            <key>
+                <column name="D_id" not-null="true" />
+            </key>
+            <one-to-many class="hms.entity.Appointment" />
+        </set>    
+        
+              <!-- Define the one-to-many association with medicalhistory -->
+        <set name="medhistories" table="medicalhistory" cascade="all">
+            <key>
+                <column name="D_id" not-null="true" />
+            </key>
+            <one-to-many class="hms.entity.MedicalHistory" />
+        </set>            
+   </class>
+</hibernate-mapping>

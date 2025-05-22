@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+       "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+       "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+   <class name="hms.entity.MedicalHistory" table="MedicalHistory">
+  
+       <id name="Mid" type="string" >
+           <column name="M_id" />
+          
+       </id>
+      
+       <many-to-one name="patient" class="hms.entity.Patient" fetch = "join"><!-- entity -->
+           <column name="P_id" not-null="true" /><!-- table -->
+       </many-to-one> 
+       
+       <many-to-one name="doctor" class="hms.entity.Doctor" fetch = "join"><!-- entity -->
+           <column name="D_id" not-null="true" /><!-- table -->
+       </many-to-one>
+       
+       <!-- Mapping for Appointment association -->
+        <many-to-one name="appointment" class="hms.entity.Appointment" column="app_id" not-null="true"/>
+      
+       
+       
+        <property name="Dateofexamination" type="date">
+           <column name="Dateofexamination" />
+       </property>
+          
+        <property name="Diagnosis" type="string">
+           <column name="Diagnosis" />
+       </property>
+       
+       <property name="prescription" type="string">
+           <column name="Prescription" length = "1000"/>
+       </property>
+      
+   </class>
+</hibernate-mapping>
+
+

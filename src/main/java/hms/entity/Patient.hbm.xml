@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<!--  here this line belongs to entity class -->
+    <class name="hms.entity.Patient" table="Patient">
+    <!--  name = variable name type = datatype -->
+    <!--   this line belongs to entity class -->
+        
+        <id name="pid" type="string">
+        <column name="P_id" />           
+        </id>
+        
+        <property name="Pfirstname" type="string" not-null="true"><!--here this line belongs to entity class -->
+            <column name="P_firstname" /><!--column name in the Database table -->
+        </property>
+        
+        <property name="Plastname" type="string" not-null="true"><!--here this line belongs to entity class -->
+            <column name="P_lastname" /><!--column name in the Database table -->
+        </property>
+        
+        <property name="age" type="int" not-null="true">
+            <column name="age" />
+        </property>
+            
+        <property name="Pgender" type="string" not-null="true">
+            <column name="P_gender" />
+        </property> 
+        
+        <property name="BloodGroup" type="string">
+            <column name="BloodGroup"/>
+        </property> 
+        
+        <property name="Paddress" type="string">
+            <column name="P_address" />
+        </property>
+            
+        <property name="phoneNumber" type="string" not-null="true">
+            <column name="phnumber" />
+        </property>
+        
+        <!-- Define the one-to-many association with Appointment -->
+        <set name="appointments" table="appointment" cascade="all">
+            <key>
+                <column name="P_id" not-null="true" />
+            </key>
+            <one-to-many class="hms.entity.Appointment" />
+        </set> 
+       
+        
+        <!-- Map the D_id column to the Doctor entity -->
+        <many-to-one name="doctor" class="hms.entity.Doctor" column="D_id"/>
+        
+        <!-- Define the one-to-many association with medicalhistory -->
+        <set name="medhistories" table="medicalhistory" cascade="all">
+            <key>
+                <column name="P_id" not-null="true" />
+            </key>
+            <one-to-many class="hms.entity.MedicalHistory" />
+        </set> 
+          
+          
+                               
+    </class>
+</hibernate-mapping>

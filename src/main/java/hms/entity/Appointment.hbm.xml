@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+       "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+       "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+   <class name="hms.entity.Appointment" table="Appointment">
+  
+       <id name="Appid" type="string" >
+           <column name="App_id" />          
+       </id>
+      
+       <many-to-one name="patient" class="hms.entity.Patient" fetch = "select"><!-- entity -->
+           <column name="P_id" not-null="true" /><!-- table -->
+       </many-to-one>          
+         
+        
+        <!-- Map the D_id column to the Doctor entity -->
+        <many-to-one name="doctor" class="hms.entity.Doctor" column="D_id"/>
+        
+         <!-- Mapping for MedicalHistory collection -->
+        <set name="medicalHistories" table="medical_history" cascade="all">
+            <key column="app_id"/>
+            <one-to-many class="hms.entity.MedicalHistory"/>
+        </set>
+        
+       
+       <property name="AppointmentDate" type="date">
+           <column name="App_date" />
+       </property>
+          
+        <property name="AppointmentTime" type="string">
+           <column name="App_time" />
+       </property>
+      
+      <property name="Status" type="string">
+           <column name="Status" />
+       </property>
+       
+   </class>
+</hibernate-mapping>

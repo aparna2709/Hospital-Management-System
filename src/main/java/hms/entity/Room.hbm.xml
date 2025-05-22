@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+       "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+       "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+     <!--  here this line belongs to entity class -->
+   <class name="hms.entity.Room" table="Room">
+  
+       <!-- name= variable name ; type = datatype -->
+  
+       <id name="Rno" type="string" ><!-- entity class -->
+           <column name="Rno" /><!-- column name in the database table -->
+       </id>
+               
+               <property name="P_id" type="string"><!-- entity class -->
+           <column name="P_id" /><!-- column name in the database table -->
+       </property> 
+       <property name="Roomtype" type="string" not-null="true"><!-- entity class -->
+           <column name="R_type" /><!-- column name in the database table -->
+       </property>
+          
+        <property name="Period" type="string" ><!-- entity class -->
+           <column name="Period" /><!-- column name in the database table -->
+       </property>
+                          
+       <one-to-one name="patient" class="hms.entity.Patient" />
+   </class>
+</hibernate-mapping>
